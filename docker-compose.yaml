@@ -14,7 +14,7 @@ services:
     image: mariadb:10.4
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: tools4ever
+      MYSQL_DATABASE: nations
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_HOST: '%'
