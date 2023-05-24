@@ -33,6 +33,6 @@ INSERT INTO Countries (CountryID, Country) VALUES
   (27, 'Burkina Faso'),
   (28, 'Burundi'),
   (29, 'Cabo Verde'),
-  (30, 'Cambodia'),
+  (30, 'Cambodia');
   -- Add more countries as needed
   ;
