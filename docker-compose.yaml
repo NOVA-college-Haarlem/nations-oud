@@ -3,9 +3,10 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./.docker/web/Dockerfile
     volumes:
-      - ./site:/var/www/html
+      - ./www:/var/www/html
+      - ./vendor:/var/www/vendor
     ports:
       - "80:80"
     depends_on:
@@ -14,15 +15,22 @@ services:
     image: mariadb:10.4
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: nations
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_HOST: '%'
     ports:
       - "3307:3306"
-
+    volumes:
+      - dbdata:/var/lib/mysql
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"  # SMTP
+      - "8025:8025"  # Web UI
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
+    build:
+      dockerfile: ./.docker/phpmyadmin/Dockerfile
     ports:
       - 8000:80
     environment:
@@ -30,3 +38,7 @@ services:
       - PMA_HOST=mariadb
     depends_on:
       - mariadb
+volumes:
+  dbdata:
+
+
